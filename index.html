@@ -2,7 +2,7 @@
   <head>
     <script src="https://vk.com/js/api/xd_connection.js?2"  type="text/javascript"></script>
     <script type="text/javascript">
-      var parts = window.location.href.split('#');
+      var parts = window.location.href.split('&hash=');
       var params = parts[parts.length - 1];
       VK.init(function() { 
         VK.callMethod('showSettingsBox', 8192);
