@@ -15,7 +15,18 @@
             url: imageUrl,
             method: 'GET'
           }).done(function(data) {
-            console.log(data);
+            var formData = new FormData();
+            formData.append('photo', data);
+            $.ajax({
+              url: upload_url,
+              data: data,
+              cache: false,
+              contentType: false,
+              processData: false,
+              method: 'POST',
+            }).done(function(imageUploadData) {
+              console.log(imageUploadData);
+            });
           });
           
         });
