@@ -11,6 +11,7 @@
         VK.callMethod('showSettingsBox', 8196);
         VK.api('photos.getWallUploadServer', function (data) {
           var upload_url = data.upload_url;
+          console.log(upload_url);
           $.ajax({
             url: imageUrl,
             method: 'GET'
