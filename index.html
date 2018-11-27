@@ -2,22 +2,22 @@
   <head>
     <script src="https://vk.com/js/api/xd_connection.js?2"  type="text/javascript"></script>
     <script type="text/javascript">
-      console.log(window.location);
+      var parts = window.location.href.split('#');
+      var params = parts[parts.length - 1];
       VK.init(function() { 
         VK.callMethod('showSettingsBox', 8192);
         VK.api("wall.post", {
-          message: 'Hello!', 
+          message: '#модульгод',
+          attachment: params,
           v: '5.73'
         }, function (data) {
-          alert("Post ID:" + data.response.post_id);
+          document.querySelector('#message').innerHTML = 'Поздравляем. Теперь вы участвуете в конкурсе!'
         });
       }, function() { 
-         // API initialization failed 
-         // Can reload page here 
     }, '5.92'); 
     </script>
   </head>
   <body>
-
+    <h1 id="message"></h1>
   </body>
 </html>
