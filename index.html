@@ -11,7 +11,7 @@
         VK.addCallback('onSettingsChanged', function() {
           VK.api('photos.getWallUploadServer', function (data) {
             console.log(data);
-            var upload_url = data.upload_url;
+            var upload_url = data.response.upload_url;
             console.log(upload_url);
             $.ajax({
               url: imageUrl,
