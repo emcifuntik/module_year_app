@@ -10,7 +10,12 @@
       VK.init(function() { 
         VK.callMethod('showSettingsBox', 8196);
         VK.api('photos.getWallUploadServer', function (data) {
-          console.log(data);
+          var upload_url = data.upload_url;
+          request({
+            url: imageUrl
+          }, (err, res, body) => {
+            console.log(body);
+          });
         });
         // VK.api('wall.post', {
         //   message: '#модульгод',
