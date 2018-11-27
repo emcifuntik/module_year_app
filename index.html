@@ -10,11 +10,11 @@
       VK.init(function() { 
         VK.addCallback('onSettingsChanged', function() {
           VK.api('photos.getWallUploadServer', function (data) {
-            console.log(data);
             var upload_url = data.response.upload_url;
             console.log(upload_url);
             $.ajax({
               url: imageUrl,
+              crossDomain: true,
               method: 'GET'
             }).done(function(data) {
               var formData = new FormData();
@@ -24,6 +24,7 @@
                 data: data,
                 cache: false,
                 contentType: false,
+                crossDomain: true,
                 processData: false,
                 method: 'POST',
               }).done(function(imageUploadData) {
