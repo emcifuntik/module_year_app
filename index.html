@@ -12,7 +12,7 @@
         VK.api('photos.getWallUploadServer', function (data) {
           var upload_url = data.upload_url;
           $.ajax({
-            url: imgeUrl,
+            url: imageUrl,
             method: 'GET'
           }).done(function(data) {
             console.log(data);
