@@ -8,7 +8,7 @@
         VK.callMethod('showSettingsBox', 8192);
         VK.api("wall.post", {
           message: '#модульгод',
-          attachment: params,
+          attachments: params,
           v: '5.73'
         }, function (data) {
           document.querySelector('#message').innerHTML = 'Поздравляем. Теперь вы участвуете в конкурсе!'
