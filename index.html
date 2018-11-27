@@ -8,29 +8,31 @@
       var data = JSON.parse(decodeURIComponent(decodeURIComponent(params)));
       var imageUrl = data.url;
       VK.init(function() { 
-        VK.callMethod('showSettingsBox', 8196);
-        VK.api('photos.getWallUploadServer', function (data) {
-          var upload_url = data.upload_url;
-          console.log(upload_url);
-          $.ajax({
-            url: imageUrl,
-            method: 'GET'
-          }).done(function(data) {
-            var formData = new FormData();
-            formData.append('photo', data);
+        VK.addCallback('onSettingsChanged', function() {
+          VK.api('photos.getWallUploadServer', function (data) {
+            console.log(data);
+            var upload_url = data.upload_url;
+            console.log(upload_url);
             $.ajax({
-              url: upload_url,
-              data: data,
-              cache: false,
-              contentType: false,
-              processData: false,
-              method: 'POST',
-            }).done(function(imageUploadData) {
-              console.log(imageUploadData);
+              url: imageUrl,
+              method: 'GET'
+            }).done(function(data) {
+              var formData = new FormData();
+              formData.append('photo', data);
+              $.ajax({
+                url: upload_url,
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                method: 'POST',
+              }).done(function(imageUploadData) {
+                console.log(imageUploadData);
+              });
             });
           });
-          
         });
+        VK.callMethod('showSettingsBox', 8196);
         // VK.api('wall.post', {
         //   message: '#модульгод',
         //   attachments: params,
