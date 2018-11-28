@@ -14,10 +14,10 @@
             url: serverDest,
             json: true
           }, function (err, res, body) {
-            if(body.photo) {
+            if(body.attachment) {
               VK.api('wall.post', {
                 message: '#модульгод',
-                attachments: body.photo,
+                attachments: body.attachment,
                 v: '5.73'
               }, function (data) {
                 if(data.response) {
