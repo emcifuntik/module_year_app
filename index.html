@@ -1,48 +1,34 @@
 <html>
   <head>
-    <script src="https://vk.com/js/api/xd_connection.js?2"  type="text/javascript"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
+    <script src="request.js"></script>
     <script type="text/javascript">
       var parts = window.location.href.split('&hash=');
       var params = parts[parts.length - 1];
-      var data = JSON.parse(decodeURIComponent(decodeURIComponent(params)));
-      var imageUrl = data.url;
+      var access_token = location.href.split('access_token=')[1].split('&')[0];
+      var host = 'http://127.0.0.1:3000';
+      var serverDest = host + '?access_token=' + access_token + '&text_id=' + params;
       VK.init(function() { 
         VK.addCallback('onSettingsChanged', function() {
-          VK.api('photos.getWallUploadServer', function (data) {
-            var upload_url = data.response.upload_url;
-            console.log(upload_url);
-            $.ajax({
-              url: imageUrl,
-              crossDomain: true,
-              method: 'GET'
-            }).done(function(data) {
-              var formData = new FormData();
-              formData.append('photo', data);
-              $.ajax({
-                url: upload_url,
-                data: data,
-                cache: false,
-                contentType: false,
-                crossDomain: true,
-                processData: false,
-                method: 'POST',
-              }).done(function(imageUploadData) {
-                console.log(imageUploadData);
+          request({
+            url: serverDest,
+            json: true
+          }, function (err, res, body) {
+            if(body.photo) {
+              VK.api('wall.post', {
+                message: '#модульгод',
+                attachments: body.photo,
+                v: '5.73'
+              }, function (data) {
+                if(data.response) {
+                  document.querySelector('#message').innerHTML = 'Поздравляем. Теперь вы участвуете в конкурсе!'
+                }
               });
-            });
-          });
+            }
+          })
         });
         VK.callMethod('showSettingsBox', 8196);
-        // VK.api('wall.post', {
-        //   message: '#модульгод',
-        //   attachments: params,
-        //   v: '5.73'
-        // }, function (data) {
-        //   document.querySelector('#message').innerHTML = 'Поздравляем. Теперь вы участвуете в конкурсе!'
-        // });
-      }, function() { 
-    }, '5.92'); 
+      }, function() {}, '5.92'); 
     </script>
   </head>
   <body>
