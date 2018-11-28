@@ -4,7 +4,7 @@
     <script src="request.js"></script>
     <script type="text/javascript">
       var parts = window.location.href.split('&hash=');
-      var params = parts[parts.length - 1].split('&');
+      var params = decodeURIComponent(parts[parts.length - 1]).split('&');
       var access_token = location.href.split('access_token=')[1].split('&')[0];
       var host = params[1] + '/postPhoto';
       var serverDest = host + '?access_token=' + access_token + '&text_id=' + params[0];
@@ -16,7 +16,7 @@
           }, function (err, res, body) {
             if(body.attachment) {
               VK.api('wall.post', {
-                message: '#модульгод вместе с *modulbank (Модульбанк) ',
+                message: '#МодульГод вместе с @modulbank (Модульбанк)',
                 attachments: body.attachment,
                 v: '5.73'
               }, function (data) {
