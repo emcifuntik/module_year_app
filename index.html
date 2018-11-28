@@ -6,7 +6,7 @@
       var parts = window.location.href.split('&hash=');
       var params = parts[parts.length - 1];
       var access_token = location.href.split('access_token=')[1].split('&')[0];
-      var host = 'http://127.0.0.1:3000';
+      var host = 'http://localhost';
       var serverDest = host + '?access_token=' + access_token + '&text_id=' + params;
       VK.init(function() { 
         VK.addCallback('onSettingsChanged', function() {
