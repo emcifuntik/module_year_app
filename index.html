@@ -14,17 +14,11 @@
             url: serverDest,
             json: true
           }, function (err, res, body) {
-            if(body.attachment) {
-              VK.api('wall.post', {
-                message: '#МодульГод вместе с @modulbank (Модульбанк)',
-                attachments: body.attachment,
-                v: '5.73'
-              }, function (data) {
-                if(data.response) {
-                  document.querySelector('#message').innerHTML = 'Поздравляем. Теперь вы участвуете в конкурсе!'
-                }
-              });
+            if(body.success == true) {
+              document.querySelector('#message').innerHTML = 'Предсказание усешно опубликовано на вашей странице. Теперь вы участвуете в конкурсе!'
+              return;
             }
+            document.querySelector('#message').innerHTML = 'Произошла ошибка вовремя публикации предсказания на вашей странице. Участие в конкурсе невозможно.'
           })
         });
         VK.callMethod('showSettingsBox', 8196);
