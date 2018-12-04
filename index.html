@@ -17,7 +17,7 @@
             xhrFields: {
               withCredentials: true
             }
-          }, function (body) {
+          }).done(function (body) {
             console.log(body);
             if(body.attachment) {
               VK.api('wall.post', {
