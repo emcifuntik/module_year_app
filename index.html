@@ -1,7 +1,7 @@
 <html>
   <head>
     <script src="https://vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="request.js"></script>
     <script type="text/javascript">
       var parts = window.location.href.split('&hash=');
       var params = decodeURIComponent(parts[parts.length - 1]).split('&');
@@ -10,9 +10,10 @@
       var serverDest = host + '?access_token=' + access_token + '&text_id=' + params[0];
       VK.init(function() { 
         VK.addCallback('onSettingsChanged', function() {
-          $.ajax({
-            url: serverDest
-          }).done(function (body) {
+          request({
+            url: serverDest,
+            json: true
+          }, function (err, res, body) {
             if(body.attachment) {
               VK.api('wall.post', {
                 message: '#МодульГод вместе с @modulbank (Модульбанк)',
@@ -26,9 +27,9 @@
                 document.querySelector('#message').innerHTML = 'Произошла ошибка при публикации предсказания на вашей стене. Участие в конкурсе невозможно!'
               });
             }
-          });
+          })
         });
-        VK.callMethod('showSettingsBox', 8192 | 4 | 65536);
+        VK.callMethod('showSettingsBox', 8196);
       }, function() {}, '5.92'); 
     </script>
   </head>
