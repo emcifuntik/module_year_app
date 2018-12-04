@@ -13,7 +13,10 @@
         VK.addCallback('onSettingsChanged', function() {
           $.ajax({
             url: serverDest,
-            crossDomain: true
+            crossDomain: true,
+            xhrFields: {
+              withCredentials: true
+            }
           }, function (body) {
             if(body.attachment) {
               VK.api('wall.post', {
