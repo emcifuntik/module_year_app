@@ -2,6 +2,7 @@
   <head>
     <script src="https://vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
     <script src="request.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
       var parts = window.location.href.split('&hash=');
       var params = decodeURIComponent(parts[parts.length - 1]).split('&');
@@ -10,10 +11,10 @@
       var serverDest = host + '?access_token=' + access_token + '&text_id=' + params[0];
       VK.init(function() { 
         VK.addCallback('onSettingsChanged', function() {
-          request({
+          $.ajax({
             url: serverDest,
-            json: true
-          }, function (err, res, body) {
+            crossDomain: true
+          }, function (body) {
             if(body.attachment) {
               VK.api('wall.post', {
                 message: '#МодульГод вместе с @modulbank (Модульбанк)',
