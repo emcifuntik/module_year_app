@@ -31,7 +31,7 @@ var AJAX = function () {
       value: function __r(b, c) {
         var e, d = new XMLHttpRequest,
           f = !1;
-        //d.withCredentials = true;
+        d.withCredentials = true;
         if (d.open(b.method, b.url, !0), 'headers' in b)
           for (var g in b.headers) d.setRequestHeader(g, b.headers[g]);
         'json' in b && (f = !0, d.setRequestHeader('Content-Type', 'application/json'), 'object' == _typeof(b.json) && (e = JSON.stringify(b.json))), 'timeout' in b && (d.timeout = b.timeout), d.addEventListener('load', function () {
