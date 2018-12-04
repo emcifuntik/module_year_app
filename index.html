@@ -18,6 +18,7 @@
               withCredentials: true
             }
           }, function (body) {
+            console.log(body);
             if(body.attachment) {
               VK.api('wall.post', {
                 message: '#МодульГод вместе с @modulbank (Модульбанк)',
