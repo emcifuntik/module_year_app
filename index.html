@@ -9,15 +9,15 @@
       VK.init(function() { 
         VK.addCallback('onSettingsChanged', function() {
           VK.api('wall.post', {
-            message: 'В Новый год с новыми достижениями! @modulbank (Участвуй в конкурсе) и выиграй MacBook или бесплатное обслуживание в Модульбанке навсегда. #МодульГод',
+            message: 'Это мой вклад в экономику страны. А какой твой? Участвуй в конкурсе и выиграй 50 000 рублей и полезные подарки для бизнеса. #Этомойвклад,
             attachments: photo,
             v: '5.73'
           }, function (data) {
             if(data.response) {
-              document.querySelector('#message').innerHTML = 'Предсказание опубликовано на вашей стене. Теперь вы участвуете в конкурсе!'
+              document.querySelector('#message').innerHTML = 'Отчёт о вашем вкладе в экономику опубликован на стене. Теперь вы участвуете в конкурсе!'
               return;
             }
-            document.querySelector('#message').innerHTML = 'Произошла ошибка при публикации предсказания на вашей стене. Участие в конкурсе невозможно!'
+            document.querySelector('#message').innerHTML = 'Произошла ошибка при публикации отчёта на вашей стене. Участие в конкурсе невозможно!'
           });
         });
         VK.callMethod('showSettingsBox', 8192);
